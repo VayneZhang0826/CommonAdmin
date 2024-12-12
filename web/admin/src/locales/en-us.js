@@ -5,5 +5,10 @@ export default {
     'username': 'Username',
     'password': 'Password',
     'login': 'Login',
-    'copyright': 'Copyright © 2024 Common Admin'
+    'copyright': 'Copyright © 2024 Common Admin',
+    'account-password-login': 'Account Password Login',
+    'mobile-password-login': 'Mobile Password Login',
+    'mobile-code-login': 'Mobile Code Login',
+    'mobile': 'Mobile',
+    'sign-out': 'Sign Out',
 }

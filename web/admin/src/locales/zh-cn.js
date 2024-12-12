@@ -5,5 +5,10 @@ export default {
     'username': '用户名',
     'password': '密码',
     'login': '登录',
-    'copyright': '版权所有 © 2024 通用后台管理系统'
+    'copyright': '版权所有 © 2024 通用后台管理系统',
+    'account-password-login': '账户密码登录',
+    'mobile-password-login': '手机号密码登录',
+    'mobile-code-login': '手机号验证码登录',
+    'mobile': '手机号',
+    'sign-out': '退出登录',
 }
