@@ -55,7 +55,7 @@ main {
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  height: 100vh;
+  height: calc(100vh - 33px);
 }
 .ant-vue-form-login-container {
   display: flex;
