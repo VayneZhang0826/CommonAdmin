@@ -1,6 +1,63 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import useUserInfoStore from '../stores/userinfo'
+import { DashboardOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons-vue'
+
+const baseRoutes = [
+  {
+    path: '/',
+    name: 'home',
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('../views/LoginView.vue'),
+  },
+]
+
+// 路由配置
+const menuRoutes = [
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: () => import('../views/Layout.vue'),
+    redirect: '/dashboard/overview',
+    meta: {
+      title: 'dashboard',
+      icon: DashboardOutlined,
+    },
+    children: [
+      {
+        path: '/dashboard/overview',
+        name: 'dashboard-overview',
+        component: () => import('../views/Overview.vue'),
+        meta: {
+          title: 'overview',
+        }
+      },
+    ],
+  },
+  {
+    path: '/personal',
+    name: 'personal',
+    component: () => import('../views/Layout.vue'),
+    redirect: '/personal/profile',
+    meta: {
+      title: 'personal',
+      icon: UserOutlined,
+    },
+    children: [
+      {
+        path: '/personal/profile',
+        name: 'personal-profile',
+        component: () => import('../views/Profile.vue'),
+        meta: {
+          title: 'profile',
+        }
+      },
+    ],
+  },
+]
 
 
 /**
@@ -9,47 +66,8 @@ import useUserInfoStore from '../stores/userinfo'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'home',
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/LoginView.vue'),
-    },
-    {
-      path: '/dashboard',
-      name: 'dashboard',
-      component: () => import('../views/Layout.vue'),
-      redirect: '/dashboard/overview',
-      children: [
-        {
-          path: 'overview',
-          name: 'dashboard-overview',
-          component: () => import('../views/Overview.vue'),
-          meta: {
-            title: 'Overview',
-          }
-        },
-      ],
-    },
-    {
-      path: '/personal',
-      name: 'personal',
-      component: () => import('../views/Layout.vue'),
-      redirect: '/personal/profile',
-      children: [
-        {
-          path: 'profile',
-          name: 'personal-profile',
-          component: () => import('../views/Profile.vue'),
-          meta: {
-            title: 'profile',
-          }
-        },
-      ],
-    },
+    ...baseRoutes,
+    ...menuRoutes,
     {
       path: '/:pathMatch(.*)*',
       name: 'match-all',
@@ -92,3 +110,4 @@ router.beforeEach((to, from, next) => {
 })
 
 export default router
+export { menuRoutes }

@@ -43,5 +43,9 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
+    // 引入文件时，可以省略文件后缀
+    extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
+    // 默认导入目录下index.[js|jsx|ts|tsx|vue]
+    mainFiles: ['index'],
   },
 })

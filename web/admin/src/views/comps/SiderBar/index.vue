@@ -2,10 +2,12 @@
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { Layout } from 'ant-design-vue'
-import { DashboardOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons-vue'
+import { menuRoutes } from '@/router'
+import { generateMenuConfig } from '@/views/comps/SiderBar/config'
 
-const openKeys = ref(['dashboard'])
-const selectedKeys = ref(['/dashboard/overview'])
+const menuConfig = generateMenuConfig(menuRoutes)
+const openKeys = ref([menuConfig[0].key])
+const selectedKeys = ref([menuConfig[0].children[0].key])
 const router = useRouter()
 
 onMounted(() => {
@@ -22,8 +24,6 @@ const handleClick = (e) => {
   openKeys.value = [e.keyPath[0]]
   router.push(e.key)
 }
-
-const collapsed = ref(false)
 </script>
 <template>
   <Layout.Sider key="sider" theme="light" class="sider">
@@ -33,22 +33,13 @@ const collapsed = ref(false)
       mode="inline"
       @click="handleClick"
     >
-      <a-sub-menu key="dashboard">
+      <a-sub-menu v-for="item in menuConfig" :key="item.key.substring(1)">
         <template #icon>
-          <DashboardOutlined />
+          <component :is="item.icon" />
         </template>
-        <template #title>{{ $t('dashboard') }}</template>
-        <a-menu-item key="/dashboard/overview">
-          <RouterLink to="/dashboard/overview">{{ $t('overview') }}</RouterLink>
-        </a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu key="personal">
-        <template #icon>
-          <UserOutlined />
-        </template>
-        <template #title>{{ $t('personal') }}</template>
-        <a-menu-item key="/personal/profile">
-          <RouterLink to="/personal/profile">{{ $t('profile') }}</RouterLink>
+        <template #title>{{ $t(item.title) }}</template>
+        <a-menu-item v-for="child in item.children" :key="child.key">
+          <RouterLink :to="child.key">{{ $t(child.title) }}</RouterLink>
         </a-menu-item>
       </a-sub-menu>
     </a-menu>

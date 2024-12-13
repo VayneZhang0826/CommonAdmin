@@ -5,7 +5,7 @@ import { useRouter, RouterView, RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import SelectLangs from '@/views/comps/SelectLangs.vue'
 import { SettingOutlined, DashboardOutlined } from '@ant-design/icons-vue'
-import SiderBar from '@/views/comps/SiderBar.vue'
+import SiderBar from '@/views/comps/SiderBar'
 
 const router = useRouter()
 const userInfoStore = useUserInfoStore()
