@@ -29,7 +29,6 @@ export default defineComponent({
         },
     },
     setup(props) {
-        console.log(props);
         return () => h(MyIcon, {
             type: props.type,
             width: props.width,

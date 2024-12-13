@@ -10,6 +10,7 @@ A  admin project use vue3;
 - use pinia;
 - use vue-router;
 - use vite;
+- use @antv/g2;
 
 ### how to run
 
@@ -22,19 +23,26 @@ npm run dev
 
 ```bash
 web/admin/src/
-├── api 接口
-├── assets 静态资源
-├── components 组件
-├── layout 布局
-├── router 路由
-├── store pinia
-├── views 页面
-├── App.vue 入口文件
-├── main.js 入口文件
-├── vite.config.js vite配置
-├── locales 国际化
-├── package.json 项目配置
-├── .env 环境变量
-├── .env.development 开发环境变量
-├── .env.production 生产环境变量
+├── api           # API interfaces
+├── assets        # Static resources
+├── components    # Components
+├── layout        # Layout
+├── router        # Router
+├── store         # Pinia store
+├── views         # Pages
+│   ├── views/comps   # Components
+├── App.vue       # Entry file
+├── main.js       # Entry file
+├── vite.config.js    # Vite configuration
+├── locales       # Internationalization
+├── package.json  # Project configuration
+├── .env          # Environment variables
+├── .env.development  # Development environment variables
+├── .env.production   # Production environment variables
 ```
+
+### Known Issues
+
+- The message component requires manual style import
+- Please use version 4.x for '@antv/g2
+

@@ -6,6 +6,7 @@ import AntDesignVue from 'ant-design-vue'
 import { createI18n } from 'vue-i18n'
 import zhCN from './locales/zh-cn'
 import enUS from './locales/en-us'
+import 'ant-design-vue/es/message/style/css'
 
 import App from './App.vue'
 import router from './router'
@@ -22,8 +23,13 @@ const i18n = createI18n({
 // 创建 app
 const app = createApp(App)
 
+
 // 使用 pinia
-app.use(createPinia())
+const pinia = createPinia()
+pinia.use(() => ({
+    debug: false,
+}))
+app.use(pinia)
 
 // 使用 router
 app.use(router)
