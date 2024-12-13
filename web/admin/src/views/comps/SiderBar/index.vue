@@ -39,6 +39,12 @@ const handleClick = (e) => {
         </template>
         <template #title>{{ $t(item.title) }}</template>
         <a-menu-item v-for="child in item.children" :key="child.key">
+          <a-sub-menu v-if="child.children" :key="child.key">
+            <template #icon>
+              <component :is="child.icon" />
+            </template>
+            <template #title>{{ $t(child.title) }}</template>
+          </a-sub-menu>
           <RouterLink :to="child.key">{{ $t(child.title) }}</RouterLink>
         </a-menu-item>
       </a-sub-menu>
