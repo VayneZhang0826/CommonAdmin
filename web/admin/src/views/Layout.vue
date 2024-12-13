@@ -1,19 +1,15 @@
 <script setup>
 import { Layout } from 'ant-design-vue'
-import { SettingOutlined, DashboardOutlined } from '@ant-design/icons-vue'
 import useUserInfoStore from '@/stores/userinfo'
 import { useRouter, RouterView, RouterLink } from 'vue-router'
 import { ref } from 'vue'
+import SelectLangs from '@/views/comps/SelectLangs.vue'
+import { SettingOutlined, DashboardOutlined } from '@ant-design/icons-vue'
+import SiderBar from '@/views/comps/SiderBar.vue'
 
-const openKeys = ref(['dashboard'])
-const selectedKeys = ref(['/overview/index'])
 const router = useRouter()
 const userInfoStore = useUserInfoStore()
 const { username, mobile } = userInfoStore.getUserInfo()
-
-router.afterEach((to) => {
-  selectedKeys.value = [to.path]
-})
 
 const signOut = () => {
   userInfoStore.setUserInfo({
@@ -26,13 +22,6 @@ const signOut = () => {
 const goHome = () => {
   router.push('/')
 }
-
-const handleClick = (e) => {
-  console.log('e', e)
-  selectedKeys.value = [e.key]
-  openKeys.value = [e.keyPath[0]]
-  router.push(e.key)
-}
 </script>
 <template>
   <Layout>
@@ -41,39 +30,15 @@ const handleClick = (e) => {
         <div class="logo" />
         <div>Common Admin</div>
       </div>
-      <div class="user-info">{{ username || mobile }}</div>
+      <div class="user-info">
+        <SelectLangs />
+        {{ username || mobile }}
+      </div>
       &nbsp;
       <a-button type="link" @click="signOut">{{ $t('sign-out') }}</a-button>
     </Layout.Header>
     <Layout.Content class="content-wrapper">
-      <Layout.Sider key="sider" theme="light" class="sider">
-        <a-menu
-          v-model:openKeys="openKeys"
-          v-model:selectedKeys="selectedKeys"
-          mode="inline"
-          @click="handleClick"
-        >
-          <a-sub-menu key="dashboard">
-            <template #icon>
-              <DashboardOutlined />
-            </template>
-            <template #title>Dashboard</template>
-            <a-menu-item key="/overview/index">
-              <RouterLink to="/overview/index">Overview</RouterLink>
-            </a-menu-item>
-          </a-sub-menu>
-          <a-sub-menu key="sub4">
-            <template #icon>
-              <SettingOutlined />
-            </template>
-            <template #title>Navigation Three</template>
-            <a-menu-item key="9">Option 9</a-menu-item>
-            <a-menu-item key="10">Option 10</a-menu-item>
-            <a-menu-item key="11">Option 11</a-menu-item>
-            <a-menu-item key="12">Option 12</a-menu-item>
-          </a-sub-menu>
-        </a-menu>
-      </Layout.Sider>
+      <SiderBar />
       <Layout.Content class="content">
         <RouterView />
       </Layout.Content>
@@ -101,14 +66,20 @@ const handleClick = (e) => {
 .content-wrapper {
   display: flex;
   flex-direction: row;
-  height: calc(100vh - 56px);
+  height: calc(100vh - 64px);
 }
 
-.sider {
-  height: calc(100vh - 56px);
-}
+// .sider {
+//   height: calc(100vh - 64px);
+//   flex: 0 0 210px !important;
+//   max-width: 210px !important;
+//   min-width: 210px !important;
+//   width: 210px !important;
+// }
 
 .content {
+  height: calc(100vh - 64px);
+  overflow-y: scroll;
   padding: 24px;
 }
 
@@ -121,9 +92,12 @@ const handleClick = (e) => {
   height: 56px;
   background-color: #fff;
   border-bottom: 1px solid #e8e8e8;
+  padding-inline: 24px !important;
 }
 .user-info {
   margin-left: auto;
+  display: flex;
+  align-items: center;
 }
 :where(.css-dev-only-do-not-override-1p3hq3p).ant-layout.ant-layout-has-sider {
   flex-direction: column;

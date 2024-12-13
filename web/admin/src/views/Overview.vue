@@ -8,21 +8,48 @@ const text = ref(null)
 
 // 准备数据
 const data = [
-  { genre: 'Sports', sold: 275 },
-  { genre: 'Strategy', sold: 115 },
-  { genre: 'Action', sold: 120 },
-  { genre: 'Shooter', sold: 350 },
-  { genre: 'Other', sold: 150 },
+  { year: '1991', value: 3 },
+  { year: '1992', value: 4 },
+  { year: '1993', value: 3.5 },
+  { year: '1994', value: 5 },
+  { year: '1995', value: 4.9 },
+  { year: '1996', value: 6 },
+  { year: '1997', value: 7 },
+  { year: '1998', value: 9 },
+  { year: '1999', value: 13 },
 ]
 onMounted(() => {
   const chart = new Chart({
     container: container.value,
+    autoFit: true,
+    width: 700,
+    height: 360,
   })
-  chart.interval().data(data).encode('x', 'genre').encode('y', 'sold')
-  // chart.render()
+  chart
+    .data(data)
+    .encode('x', 'year')
+    .encode('y', 'value')
+    .scale('x', { range: [0, 1] })
+    .scale('y', { domainMin: 0, nice: true })
+    .scale('y', {
+      domainMin: 0,
+      nice: true,
+    })
+  chart.line().label({
+    text: 'value',
+    style: {
+      dx: -10,
+      dy: -12,
+    },
+  })
+
+  chart.point().style('fill', 'white').tooltip(false)
+  chart.render()
   const gaugeChart = new Chart({
     container: gauge.value,
     autoFit: true,
+    width: 400,
+    height: 300,
   })
   gaugeChart
     .gauge()
@@ -38,7 +65,7 @@ onMounted(() => {
   const textChart = new Chart({
     container: text.value,
     width: 800,
-    height: 400,
+    height: 360,
   })
   textChart
     .wordCloud()
@@ -60,27 +87,32 @@ onMounted(() => {
 
 <template>
   <div class="overview">
-    <!-- <a-card size="default" style="width: min-content">
+    <a-card size="default" :title="`${$t('dashboard')}`" style="width: min-content">
       <template #title>
         <div>
           <span>用户总数</span>
           <span>1000</span>
         </div>
       </template>
-      <div id="container" ref="container" />
-    </a-card> -->
-    <a-card size="small" title="Small size card">
-      <div ref="gauge" />
+      <div ref="container" />
     </a-card>
-    <a-card title="Small size card" style="width: min-content">
+    <a-card :title="`${$t('dashboard')}`" style="width: min-content">
       <div ref="text" />
+    </a-card>
+    <a-card size="small" :title="`${$t('dashboard')}`">
+      <div ref="gauge" />
     </a-card>
   </div>
 </template>
 
 <style lang="less">
 .overview {
-  display: grid;
-  grid-template-columns: 800px 400px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  flex-wrap: wrap;
+  :nth-child(2) {
+    flex: 1;
+  }
 }
 </style>

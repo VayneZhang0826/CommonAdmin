@@ -2,17 +2,10 @@
 import { ref, reactive } from 'vue'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
-import { useI18n } from 'vue-i18n'
-import IconFont from '@/components/icons/IconFont'
 import useUserInfoStore from '@/stores/userinfo'
+import SelectLangs from '@/views/comps/SelectLangs.vue'
 
-const { t, locale } = useI18n()
-const { setUserInfo } = useUserInfoStore()
-
-const changeLocale = (lang) => {
-  locale.value = lang
-  document.title = t('common-admin')
-}
+const userInfoStore = useUserInfoStore()
 const router = useRouter()
 const form = reactive({
   username: '',
@@ -23,7 +16,7 @@ const activeKey = ref('account')
 const login = () => {
   if (activeKey.value == 'account' && form.username == 'admin' && form.password == 'Root123.') {
     message.success('登录成功')
-    setUserInfo({
+    userInfoStore.setUserInfo({
       username: 'admin',
       mobile: '',
     })
@@ -33,7 +26,7 @@ const login = () => {
     form.mobile == '18312345678' &&
     form.password == 'Root123.'
   ) {
-    setUserInfo({
+    userInfoStore.setUserInfo({
       mobile: '18312345678',
       username: '',
     })
@@ -47,23 +40,7 @@ const login = () => {
 
 <template>
   <main>
-    <div style="width: 100%; display: flex; justify-content: flex-end; padding-right: 100px">
-      <a-dropdown>
-        <a class="ant-dropdown-link" style="margin-left: auto" @click.prevent>
-          <IconFont type="translate" />
-        </a>
-        <template #overlay>
-          <a-menu>
-            <a-menu-item>
-              <a @click="() => changeLocale('zh-CN')">简体中文</a>
-            </a-menu-item>
-            <a-menu-item>
-              <a @click="() => changeLocale('en-US')">English</a>
-            </a-menu-item>
-          </a-menu>
-        </template>
-      </a-dropdown>
-    </div>
+    <SelectLangs />
     <div class="ant-vue-form-login-container">
       <div class="ant-vue-form-login-title">
         <div class="ant-vue-form-login-title-logo-text">

@@ -19,17 +19,33 @@ const router = createRouter({
       component: () => import('../views/LoginView.vue'),
     },
     {
-      path: '/overview',
-      name: 'overview',
+      path: '/dashboard',
+      name: 'dashboard',
       component: () => import('../views/Layout.vue'),
-      redirect: '/overview/index',
+      redirect: '/dashboard/overview',
       children: [
         {
-          path: 'index',
-          name: 'overview-index',
+          path: 'overview',
+          name: 'dashboard-overview',
           component: () => import('../views/Overview.vue'),
           meta: {
             title: 'Overview',
+          }
+        },
+      ],
+    },
+    {
+      path: '/personal',
+      name: 'personal',
+      component: () => import('../views/Layout.vue'),
+      redirect: '/personal/profile',
+      children: [
+        {
+          path: 'profile',
+          name: 'personal-profile',
+          component: () => import('../views/Profile.vue'),
+          meta: {
+            title: 'profile',
           }
         },
       ],
