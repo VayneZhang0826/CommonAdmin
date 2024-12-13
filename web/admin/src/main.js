@@ -23,7 +23,11 @@ const i18n = createI18n({
 const app = createApp(App)
 
 // 使用 pinia
-app.use(createPinia())
+const pinia = createPinia()
+pinia.use(() => ({
+    debug: false,
+}))
+app.use(pinia)
 
 // 使用 router
 app.use(router)

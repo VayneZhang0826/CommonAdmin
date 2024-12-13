@@ -44,7 +44,7 @@ const login = () => {
 </script>
 
 <template>
-  <main>
+  <div class="home">
     <div style="width: 100%; display: flex; justify-content: flex-end; padding-right: 100px">
       <a-dropdown>
         <a class="ant-dropdown-link" style="margin-left: auto" @click.prevent>
@@ -114,11 +114,11 @@ const login = () => {
         <div>{{ $t('copyright') }}</div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
-<style scoped>
-main {
+<style >
+.home {
   display: flex;
   flex-direction: column;
   align-items: center;

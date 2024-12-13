@@ -25,6 +25,7 @@ const login = () => {
     message.success('登录成功')
     setUserInfo({
       username: 'admin',
+      mobile: '',
     })
     router.push('/overview/index')
   } else if (
@@ -34,6 +35,7 @@ const login = () => {
   ) {
     setUserInfo({
       mobile: '18312345678',
+      username: '',
     })
     message.success('登录成功')
     router.push('/overview/index')

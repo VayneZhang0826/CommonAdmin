@@ -1,6 +1,7 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { onMounted } from 'vue'
+
+onMounted(() => {})
 
 const getPopupContainer = (el, dialogContext) => {
   if (dialogContext) {

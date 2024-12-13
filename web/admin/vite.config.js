@@ -19,6 +19,21 @@ export default defineConfig({
       },
     },
   },
+  mode: 'development',
+  css: {
+    preprocessorOptions: {
+      less: {
+        // 全局变量 在每个 Less 文件编译之前，自动将 variables.less 文件导入进来
+        additionalData: `@import "@/assets/styles/variables.less";`,
+        javascriptEnabled: true,
+        modifyVars: {
+          'primary-color': '#1DA57A',
+          'link-color': '#1DA57A',
+          'border-radius-base': '2px',
+        },
+      },
+    },
+  },
   plugins: [
     vue(),
     vueJsx(),

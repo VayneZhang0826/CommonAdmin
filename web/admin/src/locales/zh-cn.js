@@ -11,4 +11,5 @@ export default {
     'mobile-code-login': '手机号验证码登录',
     'mobile': '手机号',
     'sign-out': '退出登录',
+    'back-home': '返回首页',
 }

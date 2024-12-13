@@ -12,7 +12,6 @@ const useUserInfoStore = defineStore('userInfo', () => {
     }
 
     const setUserInfo = (info) => {
-        console.log('setUserInfo', info)
         userInfo.value = info
         localStorage.setItem('username', info.username)
         localStorage.setItem('mobile', info.mobile)

@@ -10,6 +10,7 @@ A  admin project use vue3;
 - use pinia;
 - use vue-router;
 - use vite;
+- use @antv/g2;
 
 ### how to run
 

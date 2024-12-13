@@ -11,4 +11,5 @@ export default {
     'mobile-code-login': 'Mobile Code Login',
     'mobile': 'Mobile',
     'sign-out': 'Sign Out',
+    'back-home': 'Back Home',
 }
