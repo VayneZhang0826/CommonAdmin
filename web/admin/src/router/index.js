@@ -89,17 +89,17 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const userInfoStore = useUserInfoStore()
   const { username, mobile } = userInfoStore.getUserInfo()
-  // 如果用户信息存在，则跳转到首页
-  if (!(!username && !mobile)) {
-    if (to.path === '/') {
+  // 如果用户信息不存在，则跳转到登录页
+  if (to.path === '/') {
+    if (!username && !mobile) {
       if (username || mobile) {
-        next('/overview/index')
+        next('/dashboard/overview')
       } else {
         next('/login')
       }
     } else {
       if (username || mobile) {
-        next()
+        next('/dashboard/overview')
       } else {
         next('/login')
       }

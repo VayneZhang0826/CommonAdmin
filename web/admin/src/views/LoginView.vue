@@ -5,6 +5,7 @@ import { message } from 'ant-design-vue'
 import useUserInfoStore from '@/stores/userinfo'
 import SelectLangs from '@/views/comps/SelectLangs.vue'
 
+
 const userInfoStore = useUserInfoStore()
 const router = useRouter()
 const form = reactive({
@@ -20,7 +21,7 @@ const login = () => {
       username: 'admin',
       mobile: '',
     })
-    router.push('/overview/index')
+    router.push('/dashboard/overview')
   } else if (
     activeKey.value == 'mobile' &&
     form.mobile == '18312345678' &&
@@ -31,7 +32,7 @@ const login = () => {
       username: '',
     })
     message.success('登录成功')
-    router.push('/overview/index')
+    router.push('/dashboard/overview')
   } else {
     message.error('登录失败')
   }

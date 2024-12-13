@@ -17,6 +17,7 @@ onMounted(() => {
 
 router.afterEach((to) => {
   selectedKeys.value = [to.path]
+  openKeys.value = [to.path.split('/')[1]]
 })
 
 const handleClick = (e) => {
