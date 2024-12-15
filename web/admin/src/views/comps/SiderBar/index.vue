@@ -60,5 +60,6 @@ const handleClick = (e) => {
   min-width: 210px !important;
   width: 210px !important;
   background: #fff;
+  border-right: 1px solid #eee
 }
 </style>
