@@ -1,4 +1,5 @@
 <script setup>
+import { Suspense, onErrorCaptured } from 'vue'
 import { Layout } from 'ant-design-vue'
 import useUserInfoStore from '@/stores/userinfo'
 import { useRouter, RouterView, RouterLink } from 'vue-router'
@@ -6,10 +7,23 @@ import { ref } from 'vue'
 import SelectLangs from '@/views/comps/SelectLangs.vue'
 import { SettingOutlined, DashboardOutlined } from '@ant-design/icons-vue'
 import SiderBar from '@/views/comps/SiderBar'
+import ErrorPage from '@/views/ErrorPage'
 
 const router = useRouter()
 const userInfoStore = useUserInfoStore()
 const { username, mobile } = userInfoStore.getUserInfo()
+const errorState = ref(false)
+const errorObj = ref({})
+const errorInstance = ref({})
+const errorInfo = ref('')
+
+onErrorCaptured((error, instance, info) => {
+  errorState.value = true
+  errorObj.value = error
+  errorInstance.value = instance
+  errorInfo.value = info
+  return false
+})
 
 const signOut = () => {
   userInfoStore.setUserInfo({
@@ -40,7 +54,10 @@ const goHome = () => {
     <Layout.Content class="content-wrapper">
       <SiderBar />
       <Layout.Content class="content">
-        <RouterView />
+        <Suspense>
+          <RouterView v-if="!errorState" />
+          <ErrorPage v-else :error="errorObj" :instance="errorInstance" :info="errorInfo" />
+        </Suspense>
       </Layout.Content>
     </Layout.Content>
   </Layout>

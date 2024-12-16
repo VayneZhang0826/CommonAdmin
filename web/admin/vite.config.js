@@ -37,7 +37,13 @@ export default defineConfig({
     },
   },
   plugins: [
-    vue(),
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) => tag.startsWith('a-') ? false : tag.includes('-')
+        }
+      }
+    }),
     vueJsx(),
     vueDevTools(),
     Components({
@@ -49,6 +55,9 @@ export default defineConfig({
       ]
     })
   ],
+  build: {
+    sourcemap: true, // 启用源码映射
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
