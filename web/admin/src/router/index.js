@@ -87,21 +87,19 @@ const router = createRouter({
  * @description 全局前置守卫
  */
 router.beforeEach((to, from, next) => {
+  console.log('to', to)
+  console.log('from', from)
   const userInfoStore = useUserInfoStore()
   const { username, mobile } = userInfoStore.getUserInfo()
   // 如果用户信息不存在，则跳转到登录页
   if (to.path === '/' || to.path === '/login') {
-    if (!username && !mobile) {
+    if (!username && !mobile && to.path !== '/login') {
+      next('/login')
+    } else {
       if (username || mobile) {
         next('/dashboard/overview')
       } else if (to.path === '/login') {
         next()
-      } else {
-        next('/login')
-      }
-    } else {
-      if (username || mobile) {
-        next('/dashboard/overview')
       } else {
         next('/login')
       }
