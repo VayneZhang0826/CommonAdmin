@@ -90,10 +90,12 @@ router.beforeEach((to, from, next) => {
   const userInfoStore = useUserInfoStore()
   const { username, mobile } = userInfoStore.getUserInfo()
   // 如果用户信息不存在，则跳转到登录页
-  if (to.path === '/') {
+  if (to.path === '/' || to.path === '/login') {
     if (!username && !mobile) {
       if (username || mobile) {
         next('/dashboard/overview')
+      } else if (to.path === '/login') {
+        next()
       } else {
         next('/login')
       }
