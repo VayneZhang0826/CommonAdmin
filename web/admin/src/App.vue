@@ -12,7 +12,7 @@ const errorInstance = ref({})
 const errorInfo = ref('')
 
 onBeforeMount(() => {
-  // 设置进度条颜色
+  // 设置进度条
   NProgress.configure({
     parent: '#app',
   })

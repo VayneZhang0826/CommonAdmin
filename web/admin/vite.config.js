@@ -37,23 +37,17 @@ export default defineConfig({
     },
   },
   plugins: [
-    vue({
-      template: {
-        compilerOptions: {
-          isCustomElement: (tag) => tag.startsWith('a-') ? false : tag.includes('-')
-        }
-      }
-    }),
+    vue(),
     vueJsx(),
     vueDevTools(),
-    Components({
-      resolvers: [
-        AntDesignVueResolver({
-          importStyle: true, // 自动导入组件样式
-          resolveIcons: true // 自动导入图标
-        })
-      ]
-    })
+    // Components({
+    //   resolvers: [
+    //     AntDesignVueResolver({
+    //       importStyle: true, // 自动导入组件样式
+    //       resolveIcons: true // 自动导入图标
+    //     })
+    //   ]
+    // })
   ],
   build: {
     sourcemap: true, // 启用源码映射

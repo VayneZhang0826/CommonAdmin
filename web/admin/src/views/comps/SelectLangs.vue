@@ -21,10 +21,10 @@ const changeLocale = (lang) => {
       <template #overlay>
         <a-menu>
           <a-menu-item>
-            <a @click="() => changeLocale('zh-CN')">简体中文</a>
+            <a @click="() => changeLocale('zh-CN')">🇨🇳 简体中文</a>
           </a-menu-item>
           <a-menu-item>
-            <a @click="() => changeLocale('en-US')">English</a>
+            <a @click="() => changeLocale('en-US')">🇺🇸 English</a>
           </a-menu-item>
         </a-menu>
       </template>
