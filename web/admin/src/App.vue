@@ -46,12 +46,12 @@ const getPopupContainer = (el, dialogContext) => {
 </script>
 
 <template>
-  <a-config-provider :getPopupContainer="getPopupContainer">
+  <AConfigProvider :getPopupContainer="getPopupContainer">
     <Suspense>
       <RouterView v-if="!errorState" />
       <ErrorPage v-else :error="errorObj" :instance="errorInstance" :info="errorInfo" />
     </Suspense>
-  </a-config-provider>
+  </AConfigProvider>
 </template>
 
 <style lang="less">

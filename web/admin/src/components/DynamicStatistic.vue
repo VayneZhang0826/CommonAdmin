@@ -72,7 +72,7 @@ function animate(start, end, duration) {
 }
 </script>
 <template>
-  <a-statistic v-bind="{ ...props, value: _value }" />
+  <AStatistic v-bind="{ ...props, value: _value }" />
 </template>
 
 <style scoped>

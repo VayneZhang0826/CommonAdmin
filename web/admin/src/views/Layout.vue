@@ -49,7 +49,7 @@ const goHome = () => {
         {{ username || mobile }}
       </div>
       &nbsp;
-      <a-button type="link" @click="signOut">{{ $t('sign-out') }}</a-button>
+      <AButton type="link" @click="signOut">{{ $t('sign-out') }}</AButton>
     </Layout.Header>
     <Layout.Content class="content-wrapper">
       <SiderBar />

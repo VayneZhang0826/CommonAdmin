@@ -21,12 +21,12 @@ if (import.meta.env.DEV) {
 <template>
   <div>
     <h1>error</h1>
-    <a-alert message="Error" type="error" show-icon>
-      <template #icon><smile-outlined /></template>
+    <AAlert message="Error" type="error" show-icon>
+      <template #icon><IconFont type="smile-outlined" /></template>
       <template #description>
         <pre>{{ error.stack }}</pre>
       </template>
-    </a-alert>
+    </AAlert>
   </div>
 </template>
 

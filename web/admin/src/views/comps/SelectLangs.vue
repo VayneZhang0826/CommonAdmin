@@ -14,21 +14,21 @@ const changeLocale = (lang) => {
 
 <template>
   <div style="width: 100%; display: flex; justify-content: flex-end; padding-right: 20px">
-    <a-dropdown>
+    <ADropdown>
       <a class="ant-dropdown-link" style="margin-left: auto" @click.prevent>
         <IconFont type="translate" />
       </a>
       <template #overlay>
-        <a-menu>
-          <a-menu-item>
+        <AMenu>
+          <AMenuItem>
             <a @click="() => changeLocale('zh-CN')">🇨🇳 简体中文</a>
-          </a-menu-item>
-          <a-menu-item>
+          </AMenuItem>
+          <AMenuItem>
             <a @click="() => changeLocale('en-US')">🇺🇸 English</a>
-          </a-menu-item>
-        </a-menu>
+          </AMenuItem>
+        </AMenu>
       </template>
-    </a-dropdown>
+    </ADropdown>
   </div>
 </template>
 <style lang="less" scoped>

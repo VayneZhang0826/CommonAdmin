@@ -5,7 +5,6 @@ import { message } from 'ant-design-vue'
 import useUserInfoStore from '@/stores/userinfo'
 import SelectLangs from '@/views/comps/SelectLangs.vue'
 
-
 const userInfoStore = useUserInfoStore()
 const router = useRouter()
 const form = reactive({
@@ -53,37 +52,37 @@ const login = () => {
         </div>
       </div>
       <div class="ant-vue-form-login-content">
-        <a-tabs v-model:activeKey="activeKey" :tabBarStyle="{ margin: '0 auto' }">
-          <a-tab-pane key="account" :tab="$t('account-password-login')">
-            <a-form :model="form" layout="vertical">
-              <a-form-item :label="$t('username')">
-                <a-input v-model:value="form.username" />
-              </a-form-item>
-              <a-form-item v-if="activeKey == 'mobile'" :label="$t('mobile')">
-                <a-input v-model:value="form.mobile" />
-              </a-form-item>
-              <a-form-item :label="$t('password')">
+        <ATabs v-model:activeKey="activeKey" :tabBarStyle="{ margin: '0 auto' }">
+          <ATabPane key="account" :tab="$t('account-password-login')">
+            <AForm :model="form" layout="vertical">
+              <AFormItem :label="$t('username')">
+                <AInput v-model:value="form.username" />
+              </AFormItem>
+              <AFormItem v-if="activeKey == 'mobile'" :label="$t('mobile')">
+                <AInput v-model:value="form.mobile" />
+              </AFormItem>
+              <AFormItem :label="$t('password')">
+                <AInputPassword v-model:value="form.password" />
+              </AFormItem>
+              <AFormItem>
+                <AButton block type="primary" @click="login">{{ $t('login') }}</AButton>
+              </AFormItem>
+            </AForm>
+          </ATabPane>
+          <ATabPane key="mobile" :tab="$t('mobile-password-login')">
+            <AForm :model="form" layout="vertical">
+              <AFormItem :label="$t('mobile')">
+                <AInput v-model:value="form.mobile" />
+              </AFormItem>
+              <AFormItem :label="$t('password')">
                 <a-input-password v-model:value="form.password" />
-              </a-form-item>
-              <a-form-item>
-                <a-button block type="primary" @click="login">{{ $t('login') }}</a-button>
-              </a-form-item>
-            </a-form>
-          </a-tab-pane>
-          <a-tab-pane key="mobile" :tab="$t('mobile-password-login')">
-            <a-form :model="form" layout="vertical">
-              <a-form-item :label="$t('mobile')">
-                <a-input v-model:value="form.mobile" />
-              </a-form-item>
-              <a-form-item :label="$t('password')">
-                <a-input-password v-model:value="form.password" />
-              </a-form-item>
-              <a-form-item>
-                <a-button block type="primary" @click="login">{{ $t('login') }}</a-button>
-              </a-form-item>
-            </a-form>
-          </a-tab-pane>
-        </a-tabs>
+              </AFormItem>
+              <AFormItem>
+                <AButton block type="primary" @click="login">{{ $t('login') }}</AButton>
+              </AFormItem>
+            </AForm>
+          </ATabPane>
+        </ATabs>
       </div>
     </div>
     <div class="ant-vue-form-login-footer">
