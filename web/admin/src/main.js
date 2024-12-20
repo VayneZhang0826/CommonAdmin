@@ -42,5 +42,6 @@ app.use(i18n)
 
 // 将 i18n 全局挂载到 app 上
 app.mount('#app').$nextTick(() => {
-    app.config.globalProperties.$t = i18n.global.t;
+    // app.config.globalProperties.$t = i18n.global.t;
+
 })

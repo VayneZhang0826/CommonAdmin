@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 
 const handleBackHome = () => {
-  router.push('/overview')
+  router.push('/')
 }
 </script>
 <template>

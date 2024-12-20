@@ -3,7 +3,8 @@ import { ref, onMounted } from 'vue'
 import { Chart } from '@antv/g2'
 import DynamicStatistic from '@/components/DynamicStatistic'
 import ARow from 'ant-design-vue/es/grid/Row'
-
+// import TestClassComp from '@/components/TestClassComp'
+import TestChildComp from '@/components/TestChildComp'
 const container = ref(null)
 const gauge = ref(null)
 const text = ref(null)
@@ -24,8 +25,10 @@ onMounted(() => {
   const chart = new Chart({
     container: container.value,
     autoFit: true,
-    width: 320,
     height: 100,
+    style: {
+      width: '100%',
+    },
   })
   chart
     .data(data)
@@ -146,6 +149,9 @@ onMounted(() => {
     <a-card size="small" :title="`${$t('dashboard')}`">
       <div ref="gauge" />
     </a-card> -->
+    <!-- <TestClassComp /> -->
+    <TestChildComp name="1" />
+    <TestChildComp name="2" />
   </div>
 </template>
 
