@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
 import useUserInfoStore from '../stores/userinfo'
 import { DashboardOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons-vue'
 
@@ -90,21 +89,22 @@ router.beforeEach((to, from, next) => {
   const userInfoStore = useUserInfoStore()
   const { username, mobile } = userInfoStore.getUserInfo()
   // 如果用户信息不存在，则跳转到登录页
-  if (to.path === '/') {
-    if (!username && !mobile) {
-      if (username || mobile) {
-        next('/dashboard/overview')
-      } else {
-        next('/login')
-      }
+  if (to.path === '/' || to.path === '/login') {
+    if (!username && !mobile && to.path !== '/login') {
+      next('/login')
     } else {
       if (username || mobile) {
         next('/dashboard/overview')
+      } else if (to.path === '/login') {
+        next()
       } else {
         next('/login')
       }
     }
   } else {
+    if (!username && !mobile) {
+      next('/login')
+    }
     next()
   }
 })

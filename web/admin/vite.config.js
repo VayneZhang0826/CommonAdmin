@@ -40,15 +40,18 @@ export default defineConfig({
     vue(),
     vueJsx(),
     vueDevTools(),
-    Components({
-      resolvers: [
-        AntDesignVueResolver({
-          importStyle: true, // 自动导入组件样式
-          resolveIcons: true // 自动导入图标
-        })
-      ]
-    })
+    // Components({
+    //   resolvers: [
+    //     AntDesignVueResolver({
+    //       importStyle: true, // 自动导入组件样式
+    //       resolveIcons: true // 自动导入图标
+    //     })
+    //   ]
+    // })
   ],
+  build: {
+    sourcemap: true, // 启用源码映射
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

@@ -1,0 +1,14 @@
+@themes: {
+    dark: black;
+    light: white;
+}
+
+
+each(@themes, {
+    html[data-theme='@{key}'] {
+        body {
+            color: red;
+            background: @value;
+        }
+    }
+});

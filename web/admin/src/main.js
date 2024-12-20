@@ -1,4 +1,6 @@
-import './assets/main.css'
+import '@/assets/main.css'
+import '@/assets/styles/theme.less'
+import '@/assets/styles/antd.less'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -6,7 +8,7 @@ import AntDesignVue from 'ant-design-vue'
 import { createI18n } from 'vue-i18n'
 import zhCN from './locales/zh-cn'
 import enUS from './locales/en-us'
-import 'ant-design-vue/es/message/style/css'
+// import 'ant-design-vue/es/message/style/css'
 
 import App from './App.vue'
 import router from './router'
@@ -42,5 +44,6 @@ app.use(i18n)
 
 // 将 i18n 全局挂载到 app 上
 app.mount('#app').$nextTick(() => {
-    app.config.globalProperties.$t = i18n.global.t;
+    // app.config.globalProperties.$t = i18n.global.t;
+
 })

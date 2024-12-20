@@ -28,28 +28,28 @@ const handleClick = (e) => {
 </script>
 <template>
   <Layout.Sider key="sider" theme="light" class="sider">
-    <a-menu
+    <AMenu
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
       mode="inline"
       @click="handleClick"
     >
-      <a-sub-menu v-for="item in menuConfig" :key="item.key.substring(1)">
+      <ASubMenu v-for="item in menuConfig" :key="item.key.substring(1)">
         <template #icon>
           <component :is="item.icon" />
         </template>
         <template #title>{{ $t(item.title) }}</template>
-        <a-menu-item v-for="child in item.children" :key="child.key">
-          <a-sub-menu v-if="child.children" :key="child.key">
+        <AMenuItem v-for="child in item.children" :key="child.key">
+          <ASubMenu v-if="child.children" :key="child.key">
             <template #icon>
               <component :is="child.icon" />
             </template>
             <template #title>{{ $t(child.title) }}</template>
-          </a-sub-menu>
+          </ASubMenu>
           <RouterLink :to="child.key">{{ $t(child.title) }}</RouterLink>
-        </a-menu-item>
-      </a-sub-menu>
-    </a-menu>
+        </AMenuItem>
+      </ASubMenu>
+    </AMenu>
   </Layout.Sider>
 </template>
 <style lang="less">
@@ -60,5 +60,6 @@ const handleClick = (e) => {
   min-width: 210px !important;
   width: 210px !important;
   background: #fff;
+  border-right: 1px solid #eee;
 }
 </style>

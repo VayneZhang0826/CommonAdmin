@@ -36,6 +36,7 @@
   --section-gap: 160px;
 }
 
+/* 媒介查询 使用prefers-color-scheme 来设置主题色，有dark和light两种主题色，根据系统主题色来设置主题色*/
 @media (prefers-color-scheme: dark) {
   :root {
     --color-background: var(--vt-c-black);
