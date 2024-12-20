@@ -1,4 +1,6 @@
-import './assets/main.css'
+import '@/assets/main.css'
+import '@/assets/styles/theme.less'
+import '@/assets/styles/antd.less'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'

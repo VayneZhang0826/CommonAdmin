@@ -4,6 +4,7 @@ import { useI18n } from 'vue-i18n'
 import ErrorPage from '@/views/ErrorPage.vue'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
+import zhCN from 'ant-design-vue/es/locale/zh_CN'
 
 const { locale } = useI18n()
 const errorState = ref(false)
@@ -46,7 +47,7 @@ const getPopupContainer = (el, dialogContext) => {
 </script>
 
 <template>
-  <AConfigProvider :getPopupContainer="getPopupContainer">
+  <AConfigProvider :getPopupContainer="getPopupContainer" :locale="zhCN">
     <Suspense>
       <RouterView v-if="!errorState" />
       <ErrorPage v-else :error="errorObj" :instance="errorInstance" :info="errorInfo" />
