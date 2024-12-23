@@ -65,9 +65,15 @@ onMounted(() => {
     .encode('x', (d) => d.year)
     .encode('y', 'value')
     .encode('shape', 'area') // 'area', 'smooth', 'hvh', 'vh', 'hv'
+    .style('fill', 'linear-gradient(-90deg, #c7aaf0 100%, #f2ecfb 100%)')
     .style('opacity', 0.2)
     .axis(false)
-  chart.line().encode('x', 'year').encode('y', 'value').encode('shape', 'line') // 'line', 'smooth', 'vh', 'hv', 'hvh'
+  chart
+    .line()
+    .encode('x', 'year')
+    .encode('y', 'value')
+    .encode('shape', 'line')
+    .style('stroke', '#c7aaf0') // 'line', 'smooth', 'vh', 'hv', 'hvh'
 
   chart.render()
   const intervalChart = new Chart({
@@ -174,7 +180,7 @@ onMounted(() => {
         </ACard>
       </ACol>
     </ARow>
-    <ARow style="margin-top: 20px">
+    <ARow class="margin-top-20">
       <ACol :span="24">
         <ACard
           :tabList="[
@@ -202,8 +208,141 @@ onMounted(() => {
             <AButton type="text">本月</AButton>
             <AButton type="text">全年</AButton>
             <ARangePicker show-time />
-            <ADatePicker show-time />
           </template>
+        </ACard>
+      </ACol>
+    </ARow>
+    <ARow class="margin-top-20">
+      <ACol :span="24">
+        <ACard>
+          <div class="board">
+            <ARow>
+              <span
+                class="board-item"
+                style="--startPosition: 100%; --endPosition: -20%; --duration: 12s"
+              >
+                欢迎光临 • 今天是个好日子
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 130%; --endPosition: -45%; --duration: 16s"
+              >
+                欢迎来到Amagi动物园 • 祝您工作愉快
+              </span>
+            </ARow>
+            <ARow>
+              <span
+                class="board-item"
+                style="--startPosition: 100%; --endPosition: -20%; --duration: 14s"
+              >
+                🐔你太美
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 110%; --endPosition: -45%; --duration: 20s"
+              >
+                灰勒塔德👩🏻‍⚕️
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 120%; --endPosition: -45%; --duration: 21s"
+              >
+                醉嚎🦁
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 125%; --endPosition: -45%; --duration: 22s"
+              >
+                嚎啸🐴
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 127%; --endPosition: -45%; --duration: 23s"
+              >
+                纯🦌人
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 130%; --endPosition: -45%; --duration: 23s"
+              >
+                🐭耗丸
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 150%; --endPosition: -45%; --duration: 23s"
+              >
+                灰勒塔德钱🐰
+              </span>
+            </ARow>
+            <ARow>
+              <span
+                class="board-item"
+                style="--startPosition: 100%; --endPosition: -20%; --duration: 14s"
+              >
+                菜只因
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 110%; --endPosition: -45%; --duration: 20s"
+              >
+                没角🐑
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 120%; --endPosition: -45%; --duration: 21s"
+              >
+                梅狸🐱
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 125%; --endPosition: -45%; --duration: 22s"
+              >
+                贞德食泥🦆</span
+              >
+              <span
+                class="board-item"
+                style="--startPosition: 127%; --endPosition: -45%; --duration: 23s"
+              >
+                早报🦅
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 130%; --endPosition: -45%; --duration: 23s"
+              >
+                瘦狗🐶
+              </span>
+              <span
+                class="board-item"
+                style="--startPosition: 150%; --endPosition: -45%; --duration: 23s"
+              >
+                雪豹🐆
+              </span>
+            </ARow>
+            <ARow>
+              <span
+                class="board-item"
+                style="--startPosition: 100%; --endPosition: -50%; --duration: 20s"
+              >
+                没有了你以后，我落入时代洪流，我是牢笼的猴，我是地狱的囚
+              </span>
+            </ARow>
+            <ARow>
+              <span
+                class="board-item"
+                style="--startPosition: 130%; --endPosition: -50%; --duration: 28s"
+              >
+                满身烟味的我，走路带上浮夸
+              </span>
+            </ARow>
+            <ARow>
+              <span
+                class="board-item"
+                style="--startPosition: 130%; --endPosition: -50%; --duration: 28s"
+              >
+                竖起中指王○他算个勾⑧
+              </span>
+            </ARow>
+          </div>
         </ACard>
       </ACol>
     </ARow>
@@ -215,6 +354,12 @@ onMounted(() => {
 
 <style lang="less">
 .overview {
+  .margin-top-20 {
+    margin-top: 20px;
+  }
+  .ant-progress-bg {
+    background: linear-gradient(to right, #108ee9, #87d068) !important;
+  }
   .ant-divider-horizontal {
     margin: 4px 0;
   }
@@ -225,21 +370,53 @@ onMounted(() => {
     width: 100%;
     height: 60px;
   }
-  .lyric {
-    display: flex;
-    flex-direction: column;
-    justify-content: end;
-    width: 100%;
-    height: 60px;
-    padding: 10px;
-    text-align: justify;
-    color: #1890ff;
 
-    &:hover {
-      mix-blend-mode: difference;
-      transition: all 0.3s ease;
+  @property --duration {
+    syntax: '<time>';
+    inherits: false;
+    initial-value: 10s;
+  }
+
+  .board {
+    background: url('@/assets/amagi-zoo.webp') no-repeat center center;
+    background-size: 100% 100%;
+    height: 500px;
+    overflow: hidden;
+    .board-item {
+      animation: toLeft var(--duration) linear infinite;
+      cursor: pointer;
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+      position: relative;
+      left: var(--startPosition);
+
+      &:hover {
+        mix-blend-mode: difference;
+        animation-play-state: paused;
+      }
+    }
+  }
+
+  @property --startPosition {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: 100%;
+  }
+
+  @property --endPosition {
+    syntax: '<length>';
+    inherits: false;
+    initial-value: -10%;
+  }
+
+  @keyframes toLeft {
+    from {
+      left: var(--startPosition);
+    }
+    to {
+      left: var(--endPosition);
     }
   }
 }
 </style>
-

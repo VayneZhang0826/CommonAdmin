@@ -8,7 +8,7 @@ import SelectLangs from '@/views/comps/SelectLangs.vue'
 import { SettingOutlined, DashboardOutlined } from '@ant-design/icons-vue'
 import SiderBar from '@/views/comps/SiderBar'
 import ErrorPage from '@/views/ErrorPage'
-
+import IconFont from '@/components/icons/IconFont'
 const router = useRouter()
 const userInfoStore = useUserInfoStore()
 const { username, mobile } = userInfoStore.getUserInfo()
@@ -36,6 +36,10 @@ const signOut = () => {
 const goHome = () => {
   router.push('/')
 }
+
+const toggleFullScreen = () => {
+  document.querySelector('#app').requestFullscreen()
+}
 </script>
 <template>
   <Layout>
@@ -45,6 +49,7 @@ const goHome = () => {
         <div>Common Admin</div>
       </div>
       <div class="user-info">
+        <IconFont type="full-screen" style="margin-right: 10px" @click="toggleFullScreen" />
         <SelectLangs />
         {{ username || mobile }}
       </div>
