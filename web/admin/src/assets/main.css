@@ -1,5 +1,10 @@
 @import './base.css';
 
+@font-face {
+  font-family: 'DingFont';
+  src: url('./font/DingTalk.woff2') format('woff2');
+}
+
 #app {
   min-width: 1024px;
   margin: 0 auto;
@@ -24,4 +29,8 @@ a {
   #app {
     padding: 0;
   }
+}
+
+* {
+  font-family: DingFont !important;
 }

@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import useUserInfoStore from '../stores/userinfo'
-import { DashboardOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons-vue'
+import { DashboardOutlined, SettingOutlined, UserOutlined, TableOutlined } from '@ant-design/icons-vue'
 
 const baseRoutes = [
   {
@@ -29,11 +29,39 @@ const menuRoutes = [
       {
         path: '/dashboard/overview',
         name: 'dashboard-overview',
-        component: () => import('../views/Overview.vue'),
+        component: () => import('../views/dashboard/Overview.vue'),
         meta: {
           title: 'overview',
         }
       },
+    ],
+  },
+  {
+    path: '/table',
+    name: 'table',
+    component: () => import('../views/Layout.vue'),
+    redirect: '/table/basic',
+    meta: {
+      title: 'table',
+      icon: TableOutlined,
+    },
+    children: [
+      {
+        path: '/table/ant',
+        name: 'ant-table',
+        component: () => import('../views/table/AntTable.vue'),
+        meta: {
+          title: 'ant-table',
+        }
+      },
+      {
+        path: '/table/surely',
+        name: 'table-surely-table',
+        component: () => import('../views/table/SurelyTable.vue'),
+        meta: {
+          title: 'surely-table',
+        }
+      }
     ],
   },
   {
@@ -49,7 +77,7 @@ const menuRoutes = [
       {
         path: '/personal/profile',
         name: 'personal-profile',
-        component: () => import('../views/Profile.vue'),
+        component: () => import('../views/userCenter/Profile.vue'),
         meta: {
           title: 'profile',
         }

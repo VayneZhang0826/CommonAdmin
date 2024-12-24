@@ -22,4 +22,8 @@ export default {
     'log-management': 'Log Management',
     'personal': 'Personal Center',
     'profile': 'Profile',
+    'table': 'Table',
+    'basic': 'Basic',
+    'ant-table': 'AntD Table',
+    'surely-table': 'Surely Table',
 }

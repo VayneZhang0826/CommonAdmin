@@ -24,8 +24,8 @@ export default defineComponent({
             default: '1em',
         },
         style: {
-            type: String,
-            default: '',
+            type: Object,
+            default: {},
         },
     },
     setup(props) {

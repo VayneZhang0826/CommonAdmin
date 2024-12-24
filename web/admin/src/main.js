@@ -1,10 +1,12 @@
 import '@/assets/main.css'
 import '@/assets/styles/theme.less'
 import '@/assets/styles/antd.less'
+import '@surely-vue/table/dist/index.less'
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import AntDesignVue from 'ant-design-vue'
+import SurelyTable from '@surely-vue/table'
 import { createI18n } from 'vue-i18n'
 import zhCN from './locales/zh-cn'
 import enUS from './locales/en-us'
@@ -35,6 +37,9 @@ app.use(pinia)
 
 // 使用 router
 app.use(router)
+
+// 使用雪梨表格
+app.use(SurelyTable)
 
 // 使用 Ant Design Vue
 app.use(AntDesignVue)

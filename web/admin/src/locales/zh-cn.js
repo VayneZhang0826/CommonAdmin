@@ -22,4 +22,8 @@ export default {
     'log-management': '日志管理',
     'personal': '个人中心',
     'profile': '个人资料',
+    'table': '表格',
+    'basic': '基础',
+    'ant-table': '蚂蚁表格',
+    'surely-table': '雪梨表格',
 }
