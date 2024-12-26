@@ -6,6 +6,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import vueDevTools from 'vite-plugin-vue-devtools'
 import Components from 'unplugin-vue-components/vite'
 import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers'
+import copy from 'vite-copy-plugin'
+import { appendFileSync } from 'node:fs'
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -40,6 +42,9 @@ export default defineConfig({
     vue(),
     vueJsx(),
     vueDevTools(),
+    copy([
+      { from: 'src/components/icons/IconFont/iconfont.js', to: 'dist/assets/js' }
+    ]),
     // Components({
     //   resolvers: [
     //     AntDesignVueResolver({
@@ -50,7 +55,32 @@ export default defineConfig({
     // })
   ],
   build: {
-    sourcemap: true, // 启用源码映射
+    sourcemap: false, // 启用源码映射
+    rollupOptions: {
+      output: {
+        manualChunks: (id, meta) => {
+          return id.includes('node_modules') ? 'vendor' : 'main'
+        },
+        // 不同的文件输出到不同的文件夹
+        assetFileNames: ({ names }) => {
+          let name = names[0]
+          let ext = name.substr(name.indexOf('.'))
+          if (['.png', '.jpg', '.jpeg', '.gif', '.svg', '.webp'].includes(ext)) {
+            return 'assets/images/[name].[hash:6].[ext]'
+          }
+          if (['.woff', '.woff2', '.eot', '.ttf'].includes(ext)) {
+            return 'assets/fonts/[name].[hash:6].[ext]'
+          }
+          return 'assets/[ext]/[name].[hash:6].[ext]'
+        },
+        chunkFileNames: ({ name }) => {
+          return `assets/js/[name].[hash:6].js`
+        },
+        entryFileNames: ({ name }) => {
+          return `assets/js/[name].[hash:6].js`
+        },
+      },
+    },
   },
   resolve: {
     alias: {

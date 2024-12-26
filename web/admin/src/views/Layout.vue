@@ -121,18 +121,22 @@ const toggleFullScreen = () => {
   display: flex;
   align-items: center;
 }
-:where(.css-dev-only-do-not-override-1p3hq3p).ant-layout.ant-layout-has-sider {
+.ant-layout.ant-layout-has-sider {
   flex-direction: column;
 }
-:where(.css-dev-only-do-not-override-1p3hq3p).ant-layout.ant-layout-has-sider > .ant-layout,
-:where(.css-dev-only-do-not-override-1p3hq3p).ant-layout.ant-layout-has-sider
-  > .ant-layout-content {
-  width: 100%;
-}
-:where(.css-dev-only-do-not-override-1p3hq3p).ant-layout .ant-layout-sider-children {
-  height: 100%;
-}
+// :where(.css-dev-only-do-not-override-1p3hq3p).ant-layout.ant-layout-has-sider > .ant-layout,
+// :where(.css-dev-only-do-not-override-1p3hq3p).ant-layout.ant-layout-has-sider
+//   > .ant-layout-content {
+//   width: 100%;
+// }
+// :where(.css-dev-only-do-not-override-1p3hq3p).ant-layout .ant-layout-sider-children {
+//   height: 100%;
+// }
 .ant-layout-header {
   background-color: #fff !important;
+}
+
+.ant-layout.ant-layout-has-sider > .ant-layout-content {
+  width: 100%;
 }
 </style>
