@@ -5,12 +5,17 @@ import ErrorPage from '@/views/ErrorPage.vue'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
 import zhCN from 'ant-design-vue/es/locale/zh_CN'
+import enUS from 'ant-design-vue/es/locale/en_US'
+import dayjs from 'dayjs'
+import 'dayjs/locale/zh-cn'
+dayjs.locale('zh-cn')
 
 const { locale } = useI18n()
 const errorState = ref(false)
 const errorObj = ref({})
 const errorInstance = ref({})
 const errorInfo = ref('')
+const antLocale = ref(zhCN)
 
 onBeforeMount(() => {
   // 设置进度条
@@ -47,7 +52,7 @@ const getPopupContainer = (el, dialogContext) => {
 </script>
 
 <template>
-  <AConfigProvider :getPopupContainer="getPopupContainer" :locale="zhCN">
+  <AConfigProvider :getPopupContainer="getPopupContainer" :locale="antLocale">
     <Suspense>
       <RouterView v-if="!errorState" />
       <ErrorPage v-else :error="errorObj" :instance="errorInstance" :info="errorInfo" />

@@ -8,6 +8,7 @@ import TestChildComp from '@/components/TestChildComp'
 const container = ref(null)
 const interval = ref(null)
 const tabChart = ref(null)
+const range = ref(['', ''])
 
 // 准备数据
 const data = [

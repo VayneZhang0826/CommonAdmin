@@ -83,6 +83,7 @@ export default defineConfig({
     },
   },
   resolve: {
+    // 别名
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
@@ -90,5 +91,6 @@ export default defineConfig({
     extensions: ['.js', '.json', '.jsx', '.mjs', '.ts', '.tsx', '.vue'],
     // 默认导入目录下index.[js|jsx|ts|tsx|vue]
     mainFiles: ['index'],
+    include: ['src']
   },
 })
