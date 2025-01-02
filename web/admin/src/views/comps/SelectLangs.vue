@@ -16,7 +16,7 @@ const changeLocale = (lang) => {
   <div style="width: 100%; display: flex; justify-content: flex-end; padding-right: 20px">
     <ADropdown>
       <a class="ant-dropdown-link" style="margin-left: auto" @click.prevent>
-        <IconFont type="translate" />
+        <IconFont type="lang" style="margin-top:24px" />
       </a>
       <template #overlay>
         <AMenu>

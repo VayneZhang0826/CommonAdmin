@@ -1,5 +1,5 @@
 <script setup>
-import { Suspense, onErrorCaptured } from 'vue'
+import { Suspense, onErrorCaptured, onMounted } from 'vue'
 import { Layout } from 'ant-design-vue'
 import useUserInfoStore from '@/stores/userinfo'
 import { useRouter, RouterView, RouterLink } from 'vue-router'
@@ -9,6 +9,10 @@ import { SettingOutlined, DashboardOutlined } from '@ant-design/icons-vue'
 import SiderBar from '@/views/comps/SiderBar'
 import ErrorPage from '@/views/ErrorPage'
 import IconFont from '@/components/icons/IconFont'
+import { useTheme } from '@/stores/theme'
+import { storeToRefs } from 'pinia'
+import darkCover from '@/assets/dark.jpg'
+import lightCover from '@/assets/light.jpg'
 const router = useRouter()
 const userInfoStore = useUserInfoStore()
 const { username, mobile } = userInfoStore.getUserInfo()
@@ -16,6 +20,14 @@ const errorState = ref(false)
 const errorObj = ref({})
 const errorInstance = ref({})
 const errorInfo = ref('')
+const visible = ref(false)
+const content = ref(null)
+const themeStore = useTheme()
+const { theme } = storeToRefs(themeStore)
+
+const _setTheme = (theme) => {
+  themeStore.setTheme(theme)
+}
 
 onErrorCaptured((error, instance, info) => {
   errorState.value = true
@@ -49,6 +61,7 @@ const toggleFullScreen = () => {
         <div>Common Admin</div>
       </div>
       <div class="user-info">
+        <IconFont type="theme" style="margin-right: 10px" @click="visible = !visible" />
         <IconFont type="full-screen" style="margin-right: 10px" @click="toggleFullScreen" />
         <SelectLangs />
         {{ username || mobile }}
@@ -58,11 +71,40 @@ const toggleFullScreen = () => {
     </Layout.Header>
     <Layout.Content class="content-wrapper">
       <SiderBar />
-      <Layout.Content class="content">
+      <Layout.Content ref="content" class="content">
         <Suspense>
           <RouterView v-if="!errorState" />
           <ErrorPage v-else :error="errorObj" :instance="errorInstance" :info="errorInfo" />
         </Suspense>
+        <ADrawer
+          :title="$t('theme')"
+          :visible="visible"
+          @close="visible = false"
+          :get-container="content"
+        >
+          <ARow>
+            <ACol :span="12">
+              <ACard>
+                <template #cover>
+                  <img :src="darkCover" />
+                </template>
+                <AButton type="primary" :disabled="theme == 'dark'" @click="_setTheme('dark')">{{
+                  $t('dark')
+                }}</AButton>
+              </ACard>
+            </ACol>
+            <ACol :span="12">
+              <ACard>
+                <template #cover>
+                  <img :src="lightCover" />
+                </template>
+                <AButton type="primary" :disabled="theme == 'light'" @click="_setTheme('light')">{{
+                  $t('light')
+                }}</AButton>
+              </ACard>
+            </ACol>
+          </ARow>
+        </ADrawer>
       </Layout.Content>
     </Layout.Content>
   </Layout>
@@ -104,6 +146,9 @@ const toggleFullScreen = () => {
   overflow-y: scroll;
   padding: 24px;
 }
+.ant-drawer-body {
+  padding: 0;
+}
 
 .ant-layout-header {
   color: #000;
@@ -132,10 +177,6 @@ const toggleFullScreen = () => {
 // :where(.css-dev-only-do-not-override-1p3hq3p).ant-layout .ant-layout-sider-children {
 //   height: 100%;
 // }
-.ant-layout-header {
-  background-color: #fff !important;
-}
-
 .ant-layout.ant-layout-has-sider > .ant-layout-content {
   width: 100%;
 }

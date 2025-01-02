@@ -51,4 +51,11 @@ class MyComponent {
     }
 }
 
-export default MyComponent;
+export default MyComponent; 
+
+const MyComponentClass = defineComponent({
+    setup() { 
+        return () => <MyComponent />
+    }
+})
+export { MyComponentClass }

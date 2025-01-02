@@ -1,5 +1,6 @@
 import { createFromIconfontCN } from '@ant-design/icons-vue';
 import { defineComponent, h } from 'vue';
+import './style.less'
 
 const isDev = import.meta.env.DEV;
 
@@ -20,11 +21,11 @@ export default defineComponent({
     },
     width: {
       type: String,
-      default: '1em',
+      default: '2em',
     },
     height: {
       type: String,
-      default: '1em',
+      default: '2em',
     },
     style: {
       type: Object,
@@ -32,13 +33,9 @@ export default defineComponent({
     },
   },
   setup(props) {
-    return () => h(MyIcon, {
-      type: props.type,
-      width: props.width,
-      height: props.height,
-      fill: props.fill,
-      style: props.style,
-    });
+    return () =>
+      <MyIcon class='icon-comp' type={props.type} style={props.style} fill={props.fill} width={props.width} height={props.height} />
+    // return  h(MyIcon, { type: props.type, style: props.style, fill: props.fill, width: props.width, height: props.height });
   },
 
 })

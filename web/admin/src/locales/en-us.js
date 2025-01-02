@@ -26,4 +26,7 @@ export default {
     'basic': 'Basic',
     'ant-table': 'AntD Table',
     'surely-table': 'Surely Table',
+    'dark': 'Dark',
+    'light': 'Light',
+    'theme': 'Theme'
 }

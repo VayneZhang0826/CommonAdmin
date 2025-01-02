@@ -26,4 +26,7 @@ export default {
     'basic': '基础',
     'ant-table': '蚂蚁表格',
     'surely-table': '雪梨表格',
+    'dark': '暗黑',
+    'light': '明亮',
+    'theme': '主题'
 }
