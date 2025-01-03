@@ -35,7 +35,6 @@ export default defineComponent({
   setup(props) {
     return () =>
       <MyIcon class='icon-comp' type={props.type} style={props.style} fill={props.fill} width={props.width} height={props.height} />
-    // return  h(MyIcon, { type: props.type, style: props.style, fill: props.fill, width: props.width, height: props.height });
   },
 
 })

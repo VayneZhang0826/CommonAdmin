@@ -1,5 +1,6 @@
 <script setup >
 import { reactive, ref } from 'vue'
+import { SerachComponent } from '@/components/serachBar/Base'
 
 const columns = ref([
   {
@@ -35,5 +36,9 @@ const data = reactive([
 ])
 </script>
 <template>
-  <ATable :columns="columns" :data-source="data" />
+  <ACard>
+    <SerachComponent :options="{ x: '1' }" />
+    <ADivider />
+    <ATable :columns="columns" :data-source="data" />
+  </ACard>
 </template>
