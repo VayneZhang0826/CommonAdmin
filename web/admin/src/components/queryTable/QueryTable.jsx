@@ -56,11 +56,11 @@ export default class QueryTableClass {
 
     render() {
         const { columns } = this.tableProps;
-        console.log(this.loading);
+        const { loading } = this;
 
         return <ACard>
-            <QueryComponent fileds={columns} onSubmit={this.loaddata} />
-            <ATable dataSource={users} columns={columns} loading={this.loading} />
+            <QueryComponent fileds={columns} onSubmit={this.loaddata} serching={loading} />
+            <ATable style={{ marginTop: '20px' }} dataSource={users} columns={columns} loading={this.loading} />
         </ACard >
     }
 }

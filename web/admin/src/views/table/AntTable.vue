@@ -6,7 +6,5 @@ import { userColumns } from '@/components/queryTable/data'
 
 </script>
 <template>
-  <ACard>
     <QueryTable :table-props="{columns:userColumns}" />
-  </ACard>
 </template>
