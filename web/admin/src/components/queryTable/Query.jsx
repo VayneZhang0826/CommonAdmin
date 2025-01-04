@@ -53,9 +53,7 @@ export default class BaseQueryClass {
     }
 
     render() {
-        const{fileds,serching} = this;
-        
-
+        const{ fileds, serching } = this;
         return <ACard>
                 <AFlex gap="middle" >
                     <AForm layout="inline" v-model={this.form} >
@@ -98,7 +96,6 @@ const QueryComponent = defineComponent({
         }
     },
     setup(props) {
-        console.log(props);
         const Component = new BaseQueryClass()
         return () => <Component {...props} />
     }
