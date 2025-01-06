@@ -55,6 +55,16 @@ export default defineConfig({
     // })
   ],
   build: {
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true,
+      },
+    },
+    // 生成 manifest.json 文件
+    manifest: true,
+    // 生成 source map 文件
     sourcemap: false, // 启用源码映射
     rollupOptions: {
       output: {

@@ -42,12 +42,10 @@ export default class BaseSearchClass {
 
     created = function () {
         this.form['x'] = 'x'
-        console.log(this.form);
     }
 
     methods = {
         submit() {
-            console.log(this.form);
         }
     }
 
@@ -76,7 +74,6 @@ const SerachComponent = defineComponent({
         },
     },
     setup(props) {
-        console.log(props);
         const Component = new BaseSearchClass()
         return () => <Component {...props} />
     }
