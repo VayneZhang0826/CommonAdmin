@@ -4,10 +4,12 @@ import { useRouter } from 'vue-router'
 import { Layout } from 'ant-design-vue'
 import { menuRoutes } from '@/router'
 import { generateMenuConfig } from '@/views/comps/SiderBar/config'
+import { MenuUnfoldOutlined, MenuFoldOutlined } from '@ant-design/icons-vue'
 
 const menuConfig = generateMenuConfig(menuRoutes)
 const openKeys = ref([menuConfig[0].key])
 const selectedKeys = ref([menuConfig[0].children[0].key])
+const collapsed = ref(true)
 const router = useRouter()
 
 onMounted(() => {
@@ -27,7 +29,12 @@ const handleClick = (e) => {
 }
 </script>
 <template>
-  <Layout.Sider key="sider" theme="light" class="sider">
+  <Layout.Sider
+    :collapsed="collapsed"
+    key="sider"
+    theme="light"
+    :class="collapsed ? 'collapsed' : 'sider'"
+  >
     <AMenu
       v-model:openKeys="openKeys"
       v-model:selectedKeys="selectedKeys"
@@ -50,6 +57,15 @@ const handleClick = (e) => {
         </AMenuItem>
       </ASubMenu>
     </AMenu>
+    <AButton
+      class="collapsed-button"
+      type="text"
+      style="margin-bottom: 16px"
+      @click="collapsed = !collapsed"
+    >
+      <MenuUnfoldOutlined v-if="collapsed" />
+      <MenuFoldOutlined v-else />
+    </AButton>
   </Layout.Sider>
 </template>
 <style lang="less">
@@ -61,5 +77,18 @@ const handleClick = (e) => {
   width: 210px !important;
   background: #fff;
   border-right: 1px solid #eee;
+}
+.sider.collapsed {
+  flex: 0 0 60px !important;
+  max-width: 60px !important;
+  min-width: 60px !important;
+  width: 60px !important;
+}
+.ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  .collapsed-button {
+    margin-top: auto;
+  }
 }
 </style>
