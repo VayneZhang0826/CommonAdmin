@@ -3,6 +3,7 @@ import { QueryComponent } from './Query'
 import { users } from './data'
 import { set } from 'nprogress'
 import { ModalActionComponent } from './ModalAction'
+import { CreateActionComponent } from './CreateAction'
 
 export default class QueryTableClass {
     constructor() {
@@ -10,6 +11,9 @@ export default class QueryTableClass {
     data = function () {
         return {
             loading: false,
+            cardProps: {
+                title: '查询表格',
+            }
         }
     }
 
@@ -25,6 +29,14 @@ export default class QueryTableClass {
         actions: {
             type: Array,
             default: []
+        },
+        extra: {
+            type: Array,
+            default: []
+        },
+        slots: {
+            type: Object,
+            default: {}
         }
     }
 
@@ -53,7 +65,8 @@ export default class QueryTableClass {
                     return <AFlex gap='middle' >
                         {this.actions.map((Item, index) => {
                             if (Item.__hmrId) {
-                                return <Item row={record} key={index} onSubmit={() => {
+                                return <Item row={record} key={index} onCallback={() => {
+                                    this.loaddata();
                                 }} />
                             } else if (Item && Item.Component && Item.Component.__hmrId) {
                                 const { Component, props } = Item;
@@ -61,7 +74,8 @@ export default class QueryTableClass {
                                     {...props}
                                     row={record}
                                     key={index}
-                                    onSubmit={() => {
+                                    onCallback={() => {
+                                        this.loaddata();
                                     }}
                                 />
 
@@ -81,27 +95,41 @@ export default class QueryTableClass {
                     this.loading = false;
                 }, 2000)
             })
-        }
-    }
+        },
+        renderCardExtra(ctx) {
+            return <CreateActionComponent
+                modalProps={{
+                    onOk: () => {
+                        let p = new Promise((resolve, reject) => {
+                            setTimeout(() => {
+                                resolve()
+                            }, 2000)
+                        })
+                        return p;
+                    }
+                }}
+                onCallback={() => {
+                    this.loaddata();
+                }}
+            />
 
-    computed = {
-        extra() {
-            return <AButton type='primary' loading={this.loading} onClick={this.loaddata}>创建</AButton>
+
         }
     }
 
     render() {
-        const { loading, tableProps } = this;
+        const { loading, tableProps, extra, slots, renderCardExtra } = this;
         const { columns } = tableProps;
 
         return <>
             <QueryComponent fileds={columns} onSubmit={this.loaddata} serching={loading} />
-            <ACard style={{ marginTop: '20px' }} title='查询表格' extra={this.extra}  >
+            <ACard style={{ marginTop: '20px' }} title='查询表格' extra={renderCardExtra(this)}  >
                 <ATable dataSource={users} columns={columns} loading={this.loading} />
             </ACard>
         </ >
     }
 }
+
 
 
 const QueryTable = defineComponent({
@@ -118,12 +146,21 @@ const QueryTable = defineComponent({
         actions: {
             type: Array,
             default: []
+        },
+        extra: {
+            type: Array,
+            default: []
+        },
+        slots: {
+            type: Object,
+            default: {}
         }
 
+
     },
-    setup(props) {
+    setup(props, { slots }) {
         const Component = new QueryTableClass()
-        return () => <Component {...props} />
+        return () => <Component {...props} slots={slots} />
     }
 })
 

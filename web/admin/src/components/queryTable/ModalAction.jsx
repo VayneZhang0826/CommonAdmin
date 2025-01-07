@@ -22,24 +22,22 @@ export default class ModalActionClass {
         }
     }
     methods = {
-        submit() {
-            this.open = true;
-            console.log(this.label, this.row);
-            this.$emit('submit');
-        },
         handleOk() {
             const { modalProps } = this;
             this.loading = true;
             const result = modalProps?.onOk?.();
-            console.log('result', result);
             if (result instanceof Promise) {
                 result.then(() => {
-                    console.log('ok');
-                    this.loading = false;
+                    this.$emit('callback');
                     this.open = false;
+                }).catch(() => {
+                }).finally(() => {
+                    this.loading = false;
                 })
             } else {
+                this.$emit('callback');
                 this.loading = false;
+                this.open = false;
             }
         },
         handleCancel() {
@@ -61,11 +59,13 @@ export default class ModalActionClass {
         };
         return <AButton
             type={this.type}
-            onClick={this.submit}
+            onClick={() => {
+                this.open = true;
+            }}
         >
             {this.label}
-            <AModal {..._modalProps} />
-        </AButton>
+            < AModal {..._modalProps} />
+        </AButton >
     }
 }
 
@@ -83,11 +83,11 @@ const ModalActionComponent = defineComponent({
     },
 
     setup(props, { emit }) {
-        const submit = () => {
-            emit('submit');
+        const callback = () => {
+            emit('callback');
         }
         const Comp = new ModalActionClass();
-        return () => <Comp {...props} submit={submit} />
+        return () => <Comp {...props} callback={callback} />
     }
 })
 

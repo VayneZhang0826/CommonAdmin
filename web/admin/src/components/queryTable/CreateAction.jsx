@@ -1,7 +1,7 @@
 import { defineComponent } from 'vue';
 import ModalActionClass from './ModalAction';
 
-export default class DeleteActionClass extends ModalActionClass {
+export default class CreateActionClass extends ModalActionClass {
 
     constructor() {
         super();
@@ -10,8 +10,8 @@ export default class DeleteActionClass extends ModalActionClass {
 
     data = function () {
         return {
-            label: '删除',
-            type: 'dashed ',
+            label: '创建',
+            type: 'primary ',
             open: false,
             loading: false
         }
@@ -26,7 +26,7 @@ export default class DeleteActionClass extends ModalActionClass {
     // }
 }
 
-const DeleteActionComponent = defineComponent({
+const CreateActionComponent = defineComponent({
     props: {
         row: {
             type: Object,
@@ -38,12 +38,12 @@ const DeleteActionComponent = defineComponent({
         }
     },
     setup(props, { emit }) {
-        const submit = () => {
-            emit('submit');
+        const callback = () => {
+            emit('callback');
         }
-        const Comp = new DeleteActionClass();
-        return () => <Comp {...props} submit={submit} />
+        const Comp = new CreateActionClass();
+        return () => <Comp {...props} callback={callback} />
     }
 })
 
-export { DeleteActionComponent };
+export { CreateActionComponent };

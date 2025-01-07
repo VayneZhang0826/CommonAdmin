@@ -42,19 +42,32 @@ class MyComponent {
 
 
     render() {
-        return <Card ref='card' >
-            <p class="count">Count: {this.count}</p>
-            <p>props.name: {this?.name || '--'}</p>
+        return <Card ref='card'>
+            {/* Default slot */}
+            {this.$slots.default ? this.$slots.default() : (
+                <>
+                    <p class="count">Count: {this.count}</p>
+                    <p>props.name: {this?.name || '--'}</p>
+                </>
+            )}
+
             <Button onClick={this.increment}>Increment</Button>
             <Button onClick={() => this.$router.push('/404')}>Force Update</Button>
+
+            {/* Named footer slot */}
+            {this.$slots.footer && (
+                <div class="footer-slot">
+                    {this.$slots.footer()}
+                </div>
+            )}
         </Card>
     }
 }
 
-export default MyComponent; 
+export default MyComponent;
 
 const MyComponentClass = defineComponent({
-    setup() { 
+    setup() {
         return () => <MyComponent />
     }
 })
