@@ -83,7 +83,7 @@ const getPopupContainer = (el, dialogContext) => {
   >
     <Suspense>
       <RouterView v-if="!errorState" />
-      <ErrorPage v-else :error="errorObj" :instance="errorInstance" :info="errorInfo" />
+      <!-- <ErrorPage v-else :error="errorObj" :instance="errorInstance" :info="errorInfo" /> -->
     </Suspense>
   </AConfigProvider>
 </template>

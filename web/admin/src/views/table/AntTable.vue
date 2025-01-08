@@ -32,9 +32,7 @@ const timeout = function (fn) {
 </script>
 <template>
   <div>
-    <!-- <Test>
-      <template #dog="{ msg }">123{{ msg }}</template>
-    </Test> -->
+    <!-- <Test> <div>123</div> </Test> -->
     <QueryTable
       :table-props="{ columns: userColumns }"
       :actions="[

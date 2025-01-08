@@ -14,12 +14,12 @@ const router = useRouter()
 
 onMounted(() => {
   selectedKeys.value = [router.currentRoute.value.path]
-  openKeys.value = [router.currentRoute.value.path.split('/')[1]]
+  openKeys.value = collapsed ? [] : [router.currentRoute.value.path.split('/')[1]]
 })
 
 router.afterEach((to) => {
   selectedKeys.value = [to.path]
-  openKeys.value = [to.path.split('/')[1]]
+  openKeys.value = collapsed ? [] : [to.path.split('/')[1]]
 })
 
 const handleClick = (e) => {
@@ -78,11 +78,11 @@ const handleClick = (e) => {
   background: #fff;
   border-right: 1px solid #eee;
 }
-.sider.collapsed {
-  flex: 0 0 60px !important;
-  max-width: 60px !important;
-  min-width: 60px !important;
-  width: 60px !important;
+.collapsed {
+  flex: 0 0 40px !important;
+  max-width: 40px !important;
+  min-width: 40px !important;
+  width: 40px !important;
 }
 .ant-layout-sider-children {
   display: flex;

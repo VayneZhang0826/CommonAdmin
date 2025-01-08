@@ -28,5 +28,6 @@ export default {
     'surely-table': '雪梨表格',
     'dark': '暗黑',
     'light': '明亮',
-    'theme': '主题'
+    'theme': '主题',
+    'form': '表单',
 }

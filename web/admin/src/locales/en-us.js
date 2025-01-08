@@ -28,5 +28,6 @@ export default {
     'surely-table': 'Surely Table',
     'dark': 'Dark',
     'light': 'Light',
-    'theme': 'Theme'
+    'theme': 'Theme',
+    'form': 'Form',
 }

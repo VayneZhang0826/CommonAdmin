@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import useUserInfoStore from '../stores/userinfo'
-import { DashboardOutlined, SettingOutlined, UserOutlined, TableOutlined } from '@ant-design/icons-vue'
+import { DashboardOutlined, SettingOutlined, UserOutlined, TableOutlined, FormOutlined } from '@ant-design/icons-vue'
 
 const baseRoutes = [
   {
@@ -62,6 +62,25 @@ const menuRoutes = [
           title: 'surely-table',
         }
       }
+    ],
+  },
+  {
+    path: '/form',
+    name: 'form',
+    component: () => import('../views/Layout.vue'),
+    meta: {
+      title: 'form',
+      icon: FormOutlined,
+    },
+    children: [
+      {
+        path: '/form/base',
+        name: 'form-base',
+        component: () => import('../views/form/BaseForm.vue'),
+        meta: {
+          title: 'form',
+        }
+      },
     ],
   },
   {
