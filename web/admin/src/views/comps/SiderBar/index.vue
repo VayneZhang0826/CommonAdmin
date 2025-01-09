@@ -14,12 +14,12 @@ const router = useRouter()
 
 onMounted(() => {
   selectedKeys.value = [router.currentRoute.value.path]
-  openKeys.value = collapsed ? [] : [router.currentRoute.value.path.split('/')[1]]
+  openKeys.value = collapsed.value ? [] : [router.currentRoute.value.path.split('/')[1]]
 })
 
 router.afterEach((to) => {
   selectedKeys.value = [to.path]
-  openKeys.value = collapsed ? [] : [to.path.split('/')[1]]
+  openKeys.value = collapsed.value ? [] : [to.path.split('/')[1]]
 })
 
 const handleClick = (e) => {

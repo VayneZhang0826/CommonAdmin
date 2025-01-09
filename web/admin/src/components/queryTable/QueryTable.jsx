@@ -55,7 +55,8 @@ export default class QueryTableClass {
                 this.loading = false;
             })
         }
-        if (this.actions.length) {
+        const option = columns.find(item => item.key === 'actions');
+        if (this.actions.length && !option) {
             columns.push({
                 title: "操作",
                 key: 'actions',

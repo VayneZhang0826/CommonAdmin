@@ -7,6 +7,7 @@ const form = ref(null)
 onMounted(() => {})
 const getValue = (v) => {
   form.value = v
+  console.log(v)
 }
 const onClick = (action) => {
   switch (action) {
