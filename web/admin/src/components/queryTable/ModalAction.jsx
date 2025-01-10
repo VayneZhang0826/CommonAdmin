@@ -43,6 +43,9 @@ export default class ModalActionClass {
         handleCancel() {
             this.open = false;
             this.modalProps?.onCancel?.();
+        },
+        renderContent() {
+            return '123'
         }
     }
     render() {
@@ -64,7 +67,9 @@ export default class ModalActionClass {
             }}
         >
             {this.label}
-            < AModal {..._modalProps} />
+            < AModal {..._modalProps} >
+                {this.test?.()}
+            </AModal>
         </AButton >
     }
 }

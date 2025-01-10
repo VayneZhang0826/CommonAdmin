@@ -2,12 +2,16 @@
 import { onMounted, reactive, ref, watch } from 'vue'
 import { FormComponent } from '@/components/Form/Form'
 const state = reactive({})
+const initValues = reactive({
+  name: '123',
+  age: 12,
+  role: 'admin',
+})
 
 const form = ref(null)
 onMounted(() => {})
 const getValue = (v) => {
   form.value = v
-  console.log(v)
 }
 const onClick = (action) => {
   switch (action) {
@@ -24,7 +28,7 @@ const onClick = (action) => {
 </script>
 <template>
   <div>
-    <FormComponent ref="form" :getFormRef="getValue" />
+    <FormComponent ref="form" :getFormRef="getValue" :initValues="initValues" />
     <AButton type="primary" @click="() => onClick('submit')"> Submit</AButton>
     <AButton type="primary" @click="() => onClick('reset')"> Reset</AButton>
   </div>

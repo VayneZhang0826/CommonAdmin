@@ -21,8 +21,12 @@ export default class FormClass {
             default: () => { 
             }
         },
+        initValues: {
+            type: Object,
+            default: {}
+        }
     }
-    created=function() {
+    created = function () {
         this.items.forEach(element => {
             this.form[element.name] = undefined;
         });
@@ -58,6 +62,7 @@ export default class FormClass {
     }
     mounted = function () { 
         this.getFormRef(this.$refs.formRef);
+        this.form = {...this.initValues};
     }
 
     watch = {
@@ -79,6 +84,7 @@ export default class FormClass {
         const { items, form, formProps } = this;
        
         return <AForm {...formProps} model={form} ref='formRef'
+            initValues
             onFinish={ 
                 () => { 
                     console.log('onFinish');
@@ -111,6 +117,10 @@ const FormComponent = defineComponent({
             default: () => { 
             }
         },
+        initValues: {
+            type: Object,
+            default:{ }
+        }
     },
     setup(props, { slots, expose }) {
         const Comp = new FormClass();

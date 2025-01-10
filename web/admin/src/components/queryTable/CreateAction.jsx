@@ -5,6 +5,9 @@ export default class CreateActionClass extends ModalActionClass {
 
     constructor() {
         super();
+        this.methods['test'] = () => {
+            return '111 fuck u brian'
+        }
     }
 
 
@@ -13,7 +16,8 @@ export default class CreateActionClass extends ModalActionClass {
             label: '创建',
             type: 'primary ',
             open: false,
-            loading: false
+            loading: false,
+            content: '创建'
         }
     }
 

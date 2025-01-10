@@ -7,6 +7,7 @@ import { ButtonActionComponent } from '@/components/queryTable/ButtonAction'
 import { userColumns } from '@/components/queryTable/data'
 import Test from '@/components/queryTable/Test'
 import asyncModalConfirm from '@/components/queryTable/asyncModalConfirm'
+import EditModalAction from '@/components/queryTable/EditModalAction'
 
 const getPromise = function () {
   return new Promise((resolve, reject) => {
@@ -37,7 +38,7 @@ const timeout = function (fn) {
       :table-props="{ columns: userColumns }"
       :actions="[
         {
-          Component: ModalActionComponent,
+          Component: EditModalAction,
           props: {
             modalProps: {
               title: '编辑用户',

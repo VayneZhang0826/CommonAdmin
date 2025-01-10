@@ -65,11 +65,7 @@ export default class QueryTableClass {
                 customRender: ({ record }) => {
                     return <AFlex gap='middle' >
                         {this.actions.map((Item, index) => {
-                            if (Item.__hmrId) {
-                                return <Item row={record} key={index} onCallback={() => {
-                                    this.loaddata();
-                                }} />
-                            } else if (Item && Item.Component && Item.Component.__hmrId) {
+                            if (Item && Item.Component && Item.Component.setup) {
                                 const { Component, props } = Item;
                                 return <Component
                                     {...props}
@@ -80,6 +76,10 @@ export default class QueryTableClass {
                                     }}
                                 />
 
+                            } else if (Item) {
+                                return <Item row={record} key={index} onCallback={() => {
+                                    this.loaddata();
+                                }} />
                             }
                         })}
                     </AFlex>
