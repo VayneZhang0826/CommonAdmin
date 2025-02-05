@@ -1,0 +1,1 @@
+export { default as useAntdTable } from './useAntdTable';

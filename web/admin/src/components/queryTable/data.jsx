@@ -46,6 +46,14 @@ const userColumns = [
             ]
         }
     },
+    {
+        title: '操作',
+        dataIndex: 'action',
+        key: 'action',
+        customRender: ({ text, record }) => {
+            return <a href="#">删除</a>
+        }
+    }
 ]
 
 export { users, userColumns };

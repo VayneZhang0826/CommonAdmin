@@ -348,8 +348,8 @@ onMounted(() => {
       </ACol>
     </ARow>
 
-    <!-- <TestChildComp name="1" />
-    <TestChildComp name="2" /> -->
+    <TestChildComp name="1" />
+    <TestChildComp name="2" />
   </div>
 </template>
 

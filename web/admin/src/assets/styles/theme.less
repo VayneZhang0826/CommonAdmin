@@ -7,7 +7,7 @@
 each(@themes, {
     html[data-theme='@{key}'] {
         body {
-            color: red;
+            color: @primary-color;
             background: @value;
         }
     }

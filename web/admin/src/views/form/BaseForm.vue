@@ -9,6 +9,31 @@ const initValues = reactive({
 })
 
 const form = ref(null)
+const items = [
+  {
+    type: 'input',
+    label: 'Name',
+    name: 'name',
+    rules: [{ required: true, message: 'Please input your name' }],
+  },
+  {
+    type: 'input',
+    label: 'Age',
+    name: 'age',
+    rules: [{ required: true, message: 'Please input your name' }],
+  },
+  {
+    type: 'select',
+    label: 'Role',
+    name: 'role',
+    itemProps: {
+      options: [
+        { label: 'Admin', value: 'admin' },
+        { label: 'User', value: 'user' },
+      ],
+    },
+  },
+]
 onMounted(() => {})
 const getValue = (v) => {
   form.value = v
@@ -28,7 +53,7 @@ const onClick = (action) => {
 </script>
 <template>
   <div>
-    <FormComponent ref="form" :getFormRef="getValue" :initValues="initValues" />
+    <FormComponent ref="form" :items="items" :getFormRef="getValue" :initValues="initValues" />
     <AButton type="primary" @click="() => onClick('submit')"> Submit</AButton>
     <AButton type="primary" @click="() => onClick('reset')"> Reset</AButton>
   </div>
