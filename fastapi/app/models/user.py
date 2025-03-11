@@ -1,9 +1,17 @@
 from sqlalchemy import Column, Integer, String
-from app.db.base_class import Base
+from db.base import BaseModel
 
-class User(Base):
-    __tablename__ = "users"
-    id = Column(Integer, primary_key=True, index=True)
+class User(BaseModel):
+    __tablename__ = "user"
     name = Column(String, index=True)
+    phone = Column(String, unique=True, index=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String)
+
+    @classmethod
+    def get_by_email(cls, session, email):
+        return session.query(cls).filter(cls.email == email).first()
+
+    @classmethod
+    def get_by_phone(cls, session, phone):
+        return session.query(cls).filter(cls.phone == phone).first()
