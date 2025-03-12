@@ -1,4 +1,4 @@
-from models.user import User
+from models.user import *
 import bcrypt 
 from db.base import BaseModel
 
@@ -21,8 +21,8 @@ def create_user(db, user: User):
     print(res)
     return res
 
-def update_user(db, user: User):
-   return User.update(db, id=user.id, user=user)
+def update_user(db, id: str, user: User):
+   return User.update(db, id=id, **user.__dict__)
 
 def delete_user(db, user_id: int):
     return User.delete_by_id(db, id=user_id)
@@ -34,3 +34,6 @@ def authenticate_user(db, email: str, password: str):
     if not bcrypt.checkpw(password.encode('utf-8'), user.hashed_password.encode('utf-8')):
         return False
     return user
+
+def create_token(db, token : UserSession): 
+    return UserSession.add(db, **token.__dict__)

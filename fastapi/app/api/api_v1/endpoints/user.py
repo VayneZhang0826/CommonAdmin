@@ -1,13 +1,17 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from api import deps
-from schemas import user, base
+from schemas.user import *
 from crud import user as crud_user
 import bcrypt
+from  core.utils import *
+import time
+
+
 router = APIRouter()
 
-@router.post("/create/user", response_model=user.User)
-def create_user(user: user.UserCreate, db: Session = Depends(deps.get_db)):
+@router.post("/create/user", response_model=User)
+def create_user(user: UserCreate, db: Session = Depends(deps.get_db)):
     if not user.password:
         raise HTTPException(status_code=400, detail="Password is required")
     if not user.email and not user.phone:
@@ -36,7 +40,7 @@ def create_user(user: user.UserCreate, db: Session = Depends(deps.get_db)):
 #         raise HTTPException(status_code=400, detail="Invalid email or password")
 #     return user_exist
 
-@router.get("/user", response_model=user.User)
+@router.get("/user", response_model=User)
 def get_user(user_id: str, db: Session = Depends(deps.get_db)):
     user = crud_user.get_user(db=db, user_id=user_id)
     if not user:
@@ -45,15 +49,15 @@ def get_user(user_id: str, db: Session = Depends(deps.get_db)):
 
 
 
-# @router.put("/user/{user_id}", response_model=user.User)
-# def update_user(user_id: int, user: user.UserUpdate, db: Session = Depends(deps.get_db)):
-    # user_exist = crud_user.get_user(db=db, user_id=user_id)
-    # if not user_exist:
-    #     raise HTTPException(status_code=404, detail="User not found")
-    # user = crud_user.update_user(db=db, user=user, user_id=user_id)
-    # return user
+@router.put("/user/{user_id}", response_model=User)
+def update_user(user_id: str, user: UserUpdate, db: Session = Depends(deps.get_db)):
+    user_exist = crud_user.get_user(db=db, user_id=user_id)
+    if not user_exist:
+        raise HTTPException(status_code=404, detail="User not found")
+    user = crud_user.update_user(db=db, id=user_id, user=user)
+    return user
 
-@router.delete("/user/{user_id}", response_model=user.User)
+@router.delete("/user/{user_id}", response_model=User)
 def delete_user(user_id: str, db: Session = Depends(deps.get_db)):
     user_exist = crud_user.get_user(db=db, user_id=user_id)
     if not user_exist:
@@ -62,7 +66,28 @@ def delete_user(user_id: str, db: Session = Depends(deps.get_db)):
     return user
 
 
-@router.post("/users", response_model=user.UserPaging)
-def get_users(user: user.UserFilter, db: Session = Depends(deps.get_db), ):
+@router.post("/users", response_model=UserPaging)
+def get_users(user: UserFilter, db: Session = Depends(deps.get_db), ):
     users = crud_user.get_users(db=db, **user.__dict__)
     return users
+
+@router.post("/login", response_model=UserLoginResponse)
+def login(user: UserLogin, db: Session = Depends(deps.get_db)):
+    email = user.email
+    phone = user.phone
+    user_exist = None
+    if not email and not phone:
+        raise HTTPException(status_code=400, detail="Email or Phone is required")
+    if email:
+        user_exist = crud_user.get_user_by_email(db=db, email=user.email)
+    if not user_exist:
+        user_exist = crud_user.get_user_by_phone(db=db, phone=user.phone)
+    if not user_exist:
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+    if not bcrypt.checkpw(user.password.encode('utf-8'), user_exist.hashed_password.encode('utf-8')):
+        raise HTTPException(status_code=400, detail="Invalid email or password")
+    token = stringGen()
+    expire_at = time.time() + 60 * 60 * 2
+    user_token = UserToken(token=token, user_id=user_exist.id, expire_at=expire_at)
+    crud_user.create_token(db=db, token=user_token)
+    return UserLoginResponse(token=token, user=user_exist)

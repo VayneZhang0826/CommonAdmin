@@ -11,7 +11,6 @@ class BaseModel(Base):
 
     id = Column(String(50), primary_key=True, default=lambda: str(uuid.uuid4()))
     create_at = Column(Integer, default=0)
-    update_at = Column(Integer, default=0)
 
     # 添加数据
     @classmethod
@@ -28,7 +27,8 @@ class BaseModel(Base):
         instance = cls.get_by_id(session, id)
         if instance:
             for key, value in kwargs.items():
-                setattr(instance, key, value)
+                if value and hasattr(instance, key):
+                    setattr(instance, key, value)
             instance.update_at = int(time.time())  # 更新时间戳
             session.commit()
         return instance
@@ -66,7 +66,7 @@ class BaseModel(Base):
             if hasattr(cls, key) and value and key != 'page' and key != 'pageSize':
                 query = query.filter(getattr(cls, key) == value)
             data = query.offset(page).limit(pageSize).all()
-        return Page(data=data, total=query.count(), page=page, pageSize=pageSize)
+        return Page(data=data, total=query.count(), page=page + 1, pageSize=pageSize)
 
 
     # 根据ID查询数据
@@ -81,3 +81,7 @@ class BaseModel(Base):
         if instance:
             session.delete(instance)
             session.commit()
+
+class BaseModelMixin(BaseModel):
+    __abstract__ = True
+    update_at = Column(Integer, default=0)

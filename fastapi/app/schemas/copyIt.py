@@ -1,31 +1,31 @@
 from pydantic import BaseModel, validator
 from typing import Optional, Union
 
-class UserBase(BaseModel):
+class ItemBase(BaseModel):
     name: str
     email: Union[str, None]
     phone: Union[str, None]
     
-class UserCreate(UserBase):
+class ItemCreate(ItemBase):
     password: str
 
-class UserUpdate(UserBase):
+class ItemUpdate(ItemBase):
     pass
 
-class UserInDBBase(UserBase):
+class ItemInDBBase(ItemBase):
     id: str
     create_at: Optional[int] = None
     update_at: Optional[int] = None
     class Config:
         orm_mode = True
 
-class User(UserInDBBase):
+class Item(ItemInDBBase):
     pass
 
-class UserInDB(UserInDBBase):
+class ItemInDB(ItemInDBBase):
     hashed_password: str
 
-class UserFilter(BaseModel):
+class ItemFilter(BaseModel):
     name: Optional[str] = None
     email: Optional[str] = None
     phone: Optional[str] = None
@@ -33,23 +33,8 @@ class UserFilter(BaseModel):
     page: Optional[int] = 1
 
 
-class UserPaging(BaseModel):
+class ItemPaging(BaseModel):
     total: int
-    data: list[User]
+    data: list[Item]
     page: int
     pageSize: int
-    
-
-class UserLogin(BaseModel):
-    email: Optional[str] = None 
-    phone: Optional[str] = None
-    password: str
-
-class UserLoginResponse(BaseModel):
-    token: str
-    user: User
-
-class UserToken(BaseModel):
-    token: str
-    user_id: str
-    expire_at: int
